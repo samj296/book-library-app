@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const accountType = ["user", "staff"];
 const bookStatus = ["available", "borrowed"]
 
+//Schema For User
+
 const userSchema = new mongoose.Schema(
     {
         name: {type: String, required: true, trim: true},
@@ -12,6 +14,8 @@ const userSchema = new mongoose.Schema(
     }
 );
 
+//Schema for book
+
 const bookSchema = new mongoose.Schema(
     {
         title: {type: String, required: true, trim: true},
@@ -20,6 +24,8 @@ const bookSchema = new mongoose.Schema(
         status: {type: String, enum: bookStatus, default: bookStatus[0]} // bookstatus[0] === "available"
     }
 );
+
+// Schema for borrowed list
 
 const borrowedSchema = new mongoose.Schema(
     {
