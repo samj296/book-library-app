@@ -1,18 +1,11 @@
 const mongoose = require("mongoose");
 
-const accountType = ["user", "staff"];
+
 const bookStatus = ["available", "borrowed"]
 
 //Schema For User
 
-const userSchema = new mongoose.Schema(
-    {
-        name: {type: String, required: true, trim: true},
-        email: {type: String, required: true, trim: true, unique: true},
-        passwordHash:{type: String, required: true},
-        role: {type: String, enum: accountType, default: accountType[0]} // accountType[0] === "user"
-    }
-);
+
 
 //Schema for book
 
@@ -36,8 +29,8 @@ const borrowedSchema = new mongoose.Schema(
     }
 );
 
-const User = mongoose.model("User", userSchema);
+
 const Book = mongoose.model("Book", bookSchema)
 const borrowRecord = mongoose.model("BorrowRecord", borrowedSchema)
 
-module.exports = {accountType, User, Book, borrowRecord};
+module.exports = {Book, borrowRecord};

@@ -1,4 +1,4 @@
-const {accountType, User, Book, borrowRecord} = require("../models/libraryModel")
+const {Book, borrowRecord} = require("../models/libraryModel")
 
 // get all book list
 

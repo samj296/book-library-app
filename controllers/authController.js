@@ -1,5 +1,5 @@
 const bcrypt = require("bcrypt");
-const {accountType, User} = require("../models/libraryModel");
+const {accountType, User} = require("../models/userModel");
 
 
 
@@ -21,8 +21,10 @@ const {accountType, User} = require("../models/libraryModel");
     if (existingUser){
         return res.status(400).send("Unable to sign up: invalid or duplicate data")
     };
+
     // using bcrypt to hash the password immediately
     const passwordHash = await bcrypt.hash(password, 10);
+    
     //results in a hash that can be saved in the DB
     
     try{

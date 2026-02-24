@@ -9,10 +9,23 @@ console.log("Loaded autRoutes");
 console.log("Loaded userRoutes");
 //const libraryRoutes = require("./routes/libraryRoutes");
 console.log("Loaded libraryRoutes");
-
+const session = require("express-session");
 
 app.use(express.json());
 
+//for now I dont need the below code so that I can use postman
+// lets express read in the data as form submissions which is what passport expects
+//app.use(express.urlencoded({extended: false}))
+
+//session middleware sets up the login state on the server and it gives the browser 
+// a cookie to reference it
+app.use(
+    session({
+        secret: process.env.Session_Secret,
+        resave: false,
+        saveUninitialized: false
+    })
+)
 
 connectionDB()
 
