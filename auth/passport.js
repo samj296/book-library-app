@@ -1,12 +1,12 @@
 const passport = require("passport");
-const LocalStartegy = require("passport-local").Strategy;
+const LocalStrategy = require("passport-local").Strategy;
 const bcrypt = require("bcrypt");
 const {User, accountType} = require("../models/userModel");
 
 //Strategy: how we verify credentials
 
 passport.use(
-    new LocalStartegy(async(email, password, done) => {
+    new LocalStrategy(async(email, password, done) => {
         try{
             const user = await User.findOne({email});
             if (!user) return done(null, false);
