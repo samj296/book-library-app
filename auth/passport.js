@@ -6,7 +6,8 @@ const {User, accountType} = require("../models/userModel");
 //Strategy: how we verify credentials
 
 passport.use(
-    new LocalStrategy(async(email, password, done) => {
+    //As I am not using the username(passport default) I have to tell passport that my username field is email
+    new LocalStrategy({usernameField: "email"},async(email, password, done) => {
         try{
             const user = await User.findOne({email});
             if (!user) return done(null, false);
@@ -30,7 +31,7 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser(async (id, done) => {
     try{
-        const user = await User.findById(id).select("email");
+        const user = await User.findById(id).select("passwordHash");
         done(null, user)
     }catch(err){
         done(err);

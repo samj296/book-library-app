@@ -12,6 +12,8 @@ console.log("Loaded libraryRoutes");
 const session = require("express-session");
 const passport = require("passport");
 const userRoutes = require("./routes/userRoutes");
+const adminController = require("./controllers/adminController")
+
 app.use(express.json());
 
 // lets express read in the data as form submissions which is what passport expects
@@ -46,7 +48,8 @@ const PORT = process.env.PORT ?? 3000;
 //according to copilot creating connection and then only the server will run
 // because it prevents server from starting if the DB fails 
 // and it ensures Passport + session have DB access
-connectionDB().then(() => {
+connectionDB().then(async () => {
+    await adminController.ensuredAdminExists();
     app.listen(PORT, () => {
         console.log(`App is running on the http://localhost:${PORT}`);
     });
